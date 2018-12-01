@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StaticInventory : MonoBehaviour {
+    public GameObject Door;
+    public GameObject AlphaObject;
+    private void Start()
+    {
+        Inventory.Door = Door;
+        Inventory.AlphaObject = AlphaObject;
+    }
     public void ChangeDataBool(ref bool DataProperty)
     {
         Debug.Log("ChangeDataBool commit");
@@ -36,6 +43,9 @@ public class StaticInventory : MonoBehaviour {
 
 public static class Inventory
 {
+    public static GameObject Door;
+    public static GameObject AlphaObject;
+
     public static Item[] _inventory = new Item[14];
     public static int currentSlot = 0;
     public static Transform DialogPanel;
@@ -101,6 +111,12 @@ public static class Inventory
             {
                 _inventory[i].count -= num;
                 InventoryPanel.GetChild(i).GetChild(0).GetChild(0).gameObject.GetComponent<Text>().text = _inventory[i].count.ToString();
+                if (_inventory[i].count == 0)
+                {
+                    Transform slot = Inventory.InventoryPanel.GetChild(i).GetChild(0);
+                    Inventory._inventory[i] = null;
+                    GameObject.Destroy(slot.gameObject);
+                }
             }
         }
     }

@@ -11,6 +11,9 @@ public class Merchant_Dialog_Behavior : MonoBehaviour {
     }
     private void Start()
     {
+        Merchant_Dialog.node[1].reply[1].OnReplyEvent.AddListener(delegate { GameStats.ItemCondition.SpeackAboutKing = true; });
+        Merchant_Dialog.node[0].reply[1].OnReplyEvent.AddListener(delegate { GameStats.ItemCondition.SpeackAboutKing = true; });
+
         Merchant_Dialog.node[4].reply[0].OnReplyEvent.AddListener(delegate { GameStats.Dialogs.TellMerchantAboutWomen = true; });
         Merchant_Dialog.node[5].reply[0].OnReplyEvent.AddListener(delegate { Inventory.DeleteSomeValueOfStackableItem("Деньги", 100); });
         //node[5].reply[0].OnReplyEvent.AddListener(delegate { Inventory.DeleteSomeValueOfStackableItem("Деньги", 100); });
@@ -20,6 +23,10 @@ public class Merchant_Dialog_Behavior : MonoBehaviour {
 
         });
         Merchant_Dialog.node[6].reply[1].OnReplyEvent.AddListener(delegate { GameStats.Dialogs.KnowAboutFlower = true; });
+
+        Merchant_Dialog.node[7].reply[2].OnReplyEvent.AddListener(delegate { Inventory.DeleteSomeValueOfStackableItem("Деньги", 25); });
+        Merchant_Dialog.node[8].reply[1].OnReplyEvent.AddListener(delegate { Inventory.DeleteSomeValueOfStackableItem("Деньги", 25); });
+        Merchant_Dialog.node[9].reply[1].OnReplyEvent.AddListener(delegate { Inventory.DeleteSomeValueOfStackableItem("Деньги", 25); });
     }
 
 }
@@ -28,6 +35,7 @@ public class Merchant_Dialog : NPCDialog
 {
     public override void startDialog()
     {
+        node[1].reply[1].ShoudBeShowen = !GameStats.ItemCondition.SpeackAboutKing;
         node[1].reply[3].ShoudBeShowen = GameStats.Dialogs.KnowAboutFlower;
         node[0].reply[2].ShoudBeShowen = Inventory.FindStackItemWithCount_AtLeast("Деньги", 100);
         node[1].reply[2].ShoudBeShowen = Inventory.FindStackItemWithCount_AtLeast("Деньги", 100);

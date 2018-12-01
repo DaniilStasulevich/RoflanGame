@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AlchemyDialog_Behavior : MonoBehaviour {
     public AlchemyDialog Alchemy_Dialog;
+    public GameObject Letter1, Letter2, girl;
     public void PutIngridient(string name, int slot)
     {
         int i = 0;
@@ -14,7 +15,7 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
         }
         ItemInAlchemyCase.Items[slot] = Inventory._inventory[i].ConstractItem();
         Inventory.DeleteItemWithName(name);
-        Alchemy_Dialog.FillItemsInNode();
+        //Alchemy_Dialog.FillItemsInNode();
     }
     private void Start()
     {
@@ -23,30 +24,14 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
         Alchemy_Dialog.node[3].reply[0].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Кристалл", 0);
-            //int i = 0;
-            //Inventory.FindItemWithName("Кристалл", ref i);
-            //if(ItemInAlchemyCase.Items[0] != null)
-            //ItemInAlchemyCase.Items[0] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Кристалл");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[3].reply[1].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Корень", 0);
-            //int i = 0;
-            //Inventory.FindItemWithName("Корень", ref i);
-            //ItemInAlchemyCase.Items[0] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Корень");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[3].reply[2].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Язык Икабоса", 0);
-            //int i = 0;
-            //Inventory.FindItemWithName("Язык Икабоса", ref i);
-            //ItemInAlchemyCase.Items[0] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Язык Икабоса");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[3].reply[3].OnReplyEvent.AddListener(delegate
         {
@@ -61,29 +46,14 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
         Alchemy_Dialog.node[4].reply[0].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Кристалл", 1);
-            //int i = 0;
-            //Inventory.FindItemWithName("Кристалл", ref i);
-            //ItemInAlchemyCase.Items[1] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Кристалл");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[4].reply[1].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Корень", 1);
-            //int i = 0;
-            //Inventory.FindItemWithName("Корень", ref i);
-            //ItemInAlchemyCase.Items[1] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Корень");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[4].reply[2].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Язык Икабоса", 1);
-            //int i = 0;
-            //Inventory.FindItemWithName("Язык Икабоса", ref i);
-            //ItemInAlchemyCase.Items[1] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Язык Икабоса");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[4].reply[3].OnReplyEvent.AddListener(delegate
         {
@@ -99,29 +69,14 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
         Alchemy_Dialog.node[5].reply[0].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Кристалл", 2);
-            //int i = 0;
-            //Inventory.FindItemWithName("Кристалл", ref i);
-            //ItemInAlchemyCase.Items[2] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Кристалл");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[5].reply[1].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Корень", 2);
-            //int i = 0;
-            //Inventory.FindItemWithName("Корень", ref i);
-            //ItemInAlchemyCase.Items[2] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Корень");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[5].reply[2].OnReplyEvent.AddListener(delegate
         {
             PutIngridient("Язык Икабоса", 2);
-            //int i = 0;
-            //Inventory.FindItemWithName("Язык Икабоса", ref i);
-            //ItemInAlchemyCase.Items[2] = Inventory._inventory[i].ConstractItem();
-            //Inventory.DeleteItemWithName("Язык Икабоса");
-            //Alchemy_Dialog.FillItemsInNode();
         });
         Alchemy_Dialog.node[5].reply[3].OnReplyEvent.AddListener(delegate
         {
@@ -133,17 +88,53 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
             }
 
         });
+
+        Alchemy_Dialog.node[1].reply[4].OnReplyEvent.AddListener(delegate
+        {
+            if (GameStats.Dialogs.TellMerchantAboutWomen)
+            {
+                if ((ItemInAlchemyCase.Items[0].name == "Корень") && (ItemInAlchemyCase.Items[1].name == "Язык Икабоса") && (ItemInAlchemyCase.Items[2].name == "Кристалл"))
+                    Alchemy_Dialog.node[1].reply[4].ToNode = 9;
+            }
+            else
+            {
+                Inventory.DialogPanel.gameObject.SetActive(false);
+                IEnumerator HuitaBlyat = AlphaChecker();
+                Inventory.AlphaObject.GetComponent<Alpha>().fadeState = Alpha.FadeState.In;
+                Inventory.Door.GetComponent<Interection_Main>().enabled = false;
+                StartCoroutine(HuitaBlyat);
+            }
+        });
     }
     public void StartDialog()
     {
         Alchemy_Dialog.startDialog();
+    }
+    IEnumerator AlphaChecker()
+    {
+        Debug.Log("Start Coroutine");
+        while (Inventory.AlphaObject.GetComponent<Alpha>().fadeState != Alpha.FadeState.InEnd)
+        {
+            Debug.Log("Working");
+            yield return new WaitForSeconds(0.2f);
+        }
+        Debug.Log("InEnd");
+        if ((ItemInAlchemyCase.Items[0].name == "Корень") && (ItemInAlchemyCase.Items[1].name == "Язык Икабоса") && (ItemInAlchemyCase.Items[2].name == "Кристалл"))
+            Letter1.SetActive(true);
+        else
+            Letter2.SetActive(true);
+        Inventory.AlphaObject.GetComponent<Alpha>().fadeState = Alpha.FadeState.Out;
+        girl.SetActive(false);
+        //StopAllCoroutines();
+        yield return null;
+
     }
 }
 
 [System.Serializable]
 public class AlchemyDialog : NPCDialog
 {
-    //[HideInInspector]
+    [HideInInspector]
     public string Node1Original;
     public void FillItemsInNode()
     {
@@ -169,6 +160,7 @@ public class AlchemyDialog : NPCDialog
     }
     public override void putNode()
     {
+        FillItemsInNode();
         node[3].reply[0].ShoudBeShowen = Inventory.FindItemWithName("Кристалл");
         node[3].reply[1].ShoudBeShowen = Inventory.FindItemWithName("Корень");
         node[3].reply[2].ShoudBeShowen = Inventory.FindItemWithName("Язык Икабоса");

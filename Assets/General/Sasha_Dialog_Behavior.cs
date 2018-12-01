@@ -15,6 +15,9 @@ public class Sasha_Dialog_Behavior : MonoBehaviour {
             gameObject.SetActive(false);
             LastMessage.SetActive(true);
         }
+        Sasha_Dialog.node[10].reply[1].ShoudBeShowen = Inventory.FindItemWithName("Кристалл") && Inventory.FindItemWithName("Корень") && Inventory.FindItemWithName("Язык Икабоса");
+        Sasha_Dialog.node[11].reply[1].ShoudBeShowen = Inventory.FindItemWithName("Кристалл") && Inventory.FindItemWithName("Корень") && Inventory.FindItemWithName("Язык Икабоса");
+
     }
     public void StartDialog()
     {

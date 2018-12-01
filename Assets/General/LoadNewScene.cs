@@ -50,7 +50,7 @@ public class LoadNewScene : MonoBehaviour {
     {
         SceneINFO_Dialog.PreSceneText = PreSceneText;
         SceneINFO_Dialog.ScenIDLoad = index;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
 
