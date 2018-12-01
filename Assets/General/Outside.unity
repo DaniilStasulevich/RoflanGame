@@ -1221,7 +1221,7 @@ MonoBehaviour:
           m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
             Culture=neutral, PublicKeyToken=null
         CloseDialog: 1
-        ShoudBeShowen: 0
+        ShoudBeShowen: 1
         replyText: "- \u0411\u043E\u044E\u0441\u044C, \u044F \u043D\u0435 \u043C\u043E\u0433\u0443
           \u0441\u0435\u0431\u0435 \u044D\u0442\u043E \u043F\u043E\u0437\u0432\u043E\u043B\u0438\u0442\u044C."
         ToNode: 1

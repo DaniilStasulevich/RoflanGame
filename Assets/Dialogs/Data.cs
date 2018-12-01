@@ -28,7 +28,7 @@ public static class GameStats
     {
         public static bool TellMerchantAboutWomen = false;
         public static bool KnowAboutFlower = false;
-        public static int[] CurrentNode_NPC = new int[4];
+        public static int[] CurrentNode_NPC = new int[5];
 
     }
 }

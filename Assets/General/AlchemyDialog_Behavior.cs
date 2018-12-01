@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AlchemyDialog_Behavior : MonoBehaviour {
     public AlchemyDialog Alchemy_Dialog;
+    public SelfDialog_ Dialog;
     public GameObject Letter1, Letter2, girl;
     public void PutIngridient(string name, int slot)
     {
@@ -99,9 +100,9 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
             else
             {
                 Inventory.DialogPanel.gameObject.SetActive(false);
+                Inventory.Door.GetComponent<Interection_Main>().enabled = false;
                 IEnumerator HuitaBlyat = AlphaChecker();
                 Inventory.AlphaObject.GetComponent<Alpha>().fadeState = Alpha.FadeState.In;
-                Inventory.Door.GetComponent<Interection_Main>().enabled = false;
                 StartCoroutine(HuitaBlyat);
             }
         });
@@ -125,6 +126,7 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
             Letter2.SetActive(true);
         Inventory.AlphaObject.GetComponent<Alpha>().fadeState = Alpha.FadeState.Out;
         girl.SetActive(false);
+        Dialog.startDialog();
         //StopAllCoroutines();
         yield return null;
 
