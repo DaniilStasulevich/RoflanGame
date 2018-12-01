@@ -100,7 +100,7 @@ public class AlchemyDialog_Behavior : MonoBehaviour {
             else
             {
                 Inventory.DialogPanel.gameObject.SetActive(false);
-                Inventory.Door.GetComponent<Interection_Main>().enabled = false;
+                Inventory.Door.GetComponent<BoxCollider2D>().enabled = false;
                 IEnumerator HuitaBlyat = AlphaChecker();
                 Inventory.AlphaObject.GetComponent<Alpha>().fadeState = Alpha.FadeState.In;
                 StartCoroutine(HuitaBlyat);
