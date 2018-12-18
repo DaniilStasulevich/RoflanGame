@@ -4,7 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - InteractionObject
+=======
+  - Right
+  - Left
+  - Wait
+>>>>>>> 0bd7d08... схс
   layers:
   - Default
   - TransparentFX
