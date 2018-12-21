@@ -4,20 +4,37 @@ using UnityEngine;
 
 public class InteractionTrigger : MonoBehaviour {
     private InteractionManager Manager;
-
-	void Start () {
+    RaycastHit2D lastHit = new RaycastHit2D();
+    LayerMask mask;
+    void Start () {
         Manager = GetComponent<InteractionManager>();
-	}
-
-    //Логика того, когда у нас появляется возможность взаиможействовать с NPC (Для примера нам надо просто войти в коллайдер)
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnInteractionStart(collision.gameObject);
-        Debug.Log("TriggerEnter");
+        mask = LayerMask.GetMask("CommonRay");
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    //Логика того, когда у нас появляется возможность взаиможействовать с NPC
+    //Логика с лучами
+    private void Update()
     {
-        OnInteractionClosed();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, PlayerState.instance.viewDirection, 5.0f);
+        if (hit.collider != null && hit.collider.tag == "Interactable")
+        {
+            if (lastHit.collider != null && hit.collider.gameObject == lastHit.collider.gameObject)
+            {
+                OnInteractionStart(hit.collider.gameObject);
+                Debug.Log("LookAt Same " + hit.collider.name);
+            }
+            else
+            {
+                lastHit = hit;
+                OnInteractionClosed();
+                OnInteractionStart(hit.collider.gameObject);
+                Debug.Log("LookAt " + hit.collider.name);
+            }
+        }
+        else
+        {
+            Debug.Log("Look At Nothing");
+            OnInteractionClosed();
+        }
     }
 
 

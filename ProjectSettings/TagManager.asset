@@ -5,12 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - InteractionObject
 =======
   - Right
   - Left
   - Wait
 >>>>>>> 0bd7d08... схс
+=======
+  - InteractionObject
+  - Interactable
+>>>>>>> 7ec41ed... Распределил скрипты по папкам и доделал триггер взаимодействий и длительные действия
   layers:
   - Default
   - TransparentFX
@@ -23,7 +28,11 @@ TagManager:
   - Furniture
   - Player
   - InteractionArea
+<<<<<<< HEAD
   - 
+=======
+  - CommonRay
+>>>>>>> 7ec41ed... Распределил скрипты по папкам и доделал триггер взаимодействий и длительные действия
   - 
   - 
   - 
