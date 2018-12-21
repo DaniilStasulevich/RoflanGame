@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f09f825d85625246a83c1d7b37e827a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textSize: 14
+  textSize: 20
   textColor: {r: 1, g: 1, b: 1, a: 1}
   width: 200
   height: 40
@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c25eb69b3cbdc6c43819bd312e1beee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DrawingInteractions: 0
+  textSize: 14
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114919522806218488
 MonoBehaviour:
   m_ObjectHideFlags: 1

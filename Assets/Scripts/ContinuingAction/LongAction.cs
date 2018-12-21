@@ -57,7 +57,7 @@ public class LongAction : MonoBehaviour {
         style.normal.textColor = textColor;
         style.alignment = TextAnchor.MiddleCenter;
 
-        GUI.Label(new Rect(screenPosition.x, screenPosition.y - textSize * 2, 0, 0), actionName, style);
+        GUI.Label(new Rect(screenPosition.x, screenPosition.y - textSize * 1.5f, 0, 0), actionName, style);
     }
 
     private void OnGUI()
