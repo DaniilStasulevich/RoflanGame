@@ -14,8 +14,9 @@ public class InteractionTrigger : MonoBehaviour {
     //Логика с лучами
     private void Update()
     {
+        //Пускаем луч с позиции игрока в том направлении, куда он смотрит, на слое,который игнорит коллайдер игрока. Дистанция 5
         RaycastHit2D hit = Physics2D.Raycast(transform.position, PlayerState.instance.viewDirection, 5.0f);
-        if (hit.collider != null && hit.collider.tag == "Interactable")
+        if (hit.collider != null && hit.collider.tag == "Interactable") //Если натыкаемся на объект, с которым можно взаимодействовать
         {
             if (lastHit.collider != null && hit.collider.gameObject == lastHit.collider.gameObject)
             {

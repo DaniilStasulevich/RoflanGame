@@ -18,26 +18,27 @@ public class InteractionManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R) && Interactions[2] != null)
             Interactions[2].Action();
     }
-
+    //Вызывается, когда мы подходим к объекту, с которым возможны взаимодействия
     public void StartInteraction(GameObject o)
     {
-        InteractableObj = o;
-        DrawingInteractions = true;
-        IInteraction[] interactions = o.GetComponents<IInteraction>();
+        InteractableObj = o; //Запоминаем объект, с которым в данный момент может быть взаимодействие
+        DrawingInteractions = true; //Рисуем над объектом меню взаимодействий
+        IInteraction[] interactions = o.GetComponents<IInteraction>(); //Берем у объекта все взаимодействия, которые к нему прикреплены
         int i = 0;
         foreach(MonoBehaviour interaction in interactions)
         {
-            if (interaction.enabled == true)
+            if (interaction.enabled == true) //Проверяем активно ли взаимодействие и если да, заносим его в основной массив 
             {
                 Interactions[i] = (IInteraction)interaction;
                 i++;
             }
         }
     }
+    //Вызывается, когда мы уже не можем совершать взаимодействия с объектом
     public void CloseInteraction()
     {
         DrawingInteractions = false;
-        Interactions = new IInteraction[3];
+        Interactions = new IInteraction[3]; //обнуляем массив
     }
 
     private void OnGUI()
@@ -51,11 +52,12 @@ public class InteractionManager : MonoBehaviour {
     {
         int j = 1;
         string text = "";
+        //берем позицию вверху поцентру объекта
         Vector3 worldPosition = new Vector3(InteractableObj.transform.position.x, 
                                             InteractableObj.transform.position.y + InteractableObj.gameObject.GetComponent<SpriteRenderer>().size.y / 2, 
                                             InteractableObj.transform.position.z);
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-        screenPosition.y = Screen.height - screenPosition.y;
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition); //Переводим мировые координаты юньки в координаты экрана
+        screenPosition.y = Screen.height - screenPosition.y; //Просто более правильная позиция
         for (int i = Interactions.Length - 1; i >= 0; i--)
         {
             if (Interactions[i] != null)
@@ -77,7 +79,7 @@ public class InteractionManager : MonoBehaviour {
                 style.richText = true;
                 style.normal.textColor = textColor;
                 style.alignment = TextAnchor.MiddleCenter;
-
+                //Выводим текст каждого взаимодействия на необходимой высоте
                 GUI.Label(new Rect(screenPosition.x, screenPosition.y - textSize * 1.5f * j, 0, 0), text, style);
                 j++;
             }
