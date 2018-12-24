@@ -9,18 +9,22 @@ public class Rays : MonoBehaviour {
 	Vector2[] ArrayOfVectors = new[] { one, one, one, one, one, one, one, one, one };
 	#endregion
 
-	public GameObject CurrentEnemy;
+	//public GameObject CurrentEnemy;
 	private SpriteRenderer sprite;
 	private float originOffset = 0.5f;
 	private float raycastMaxDistance = 10f;
 	public int angle;
 	private int _range;
 	public int range;
-	public Transform Player;
-	
+	private GameObject Player;
+
+	public static Rays operator -(Rays op) { Rays result = new Rays(); result.range = -op.range; return result; }
+
 	void Start () {
 		// Получем доступ к свойствам SpriteRender
 		sprite = GetComponentInChildren<SpriteRenderer>();
+
+		Player = GameObject.Find("Player");
 		_range = -range;
 	}
 
@@ -28,7 +32,7 @@ public class Rays : MonoBehaviour {
 		foreach (var direction in ArrayOfVectors)
 			CheckRaycast(direction);
 
-		if (CurrentEnemy.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Right")
+		if (this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Right")
 		{
 			sprite.flipX = false;
 			range = Mathf.Abs(range);
@@ -57,9 +61,9 @@ public class Rays : MonoBehaviour {
 		if (hit.collider != null && hit.collider.tag == "Player")
 		{
 			Debug.DrawRay(startingPosition, direction, Color.yellow);
-			for(int i=0;i<CurrentEnemy.GetComponent<MoveTest>().Points.objects.Length;i++)
-			 CurrentEnemy.GetComponent<MoveTest>().Points[i]=Player;
-			CurrentEnemy.GetComponent<AudioSource>().enabled = true;
+			for(int i=0;i< this.gameObject.GetComponent<MoveTest>().Points.objects.Length;i++)
+				this.gameObject.GetComponent<MoveTest>().Points[i]=Player.transform;
+			this.gameObject.GetComponent<AudioSource>().enabled = true;
 			//Debug.Log("Вас заметили");
 		}
 		return Physics2D.Raycast(startingPosition, direction, raycastMaxDistance);
@@ -97,9 +101,9 @@ public class Rays : MonoBehaviour {
 	}
 	public int PreviousFlag()
 	{
-		if (CurrentEnemy.GetComponent<MoveTest>()._currentPoint == 0)
-			return CurrentEnemy.GetComponent<MoveTest>().Points.objects.Length - 1;
+		if (this.gameObject.GetComponent<MoveTest>()._currentPoint == 0)
+			return this.gameObject.GetComponent<MoveTest>().Points.objects.Length - 1;
 		else
-			return CurrentEnemy.GetComponent<MoveTest>()._currentPoint - 1;
+			return this.gameObject.GetComponent<MoveTest>()._currentPoint - 1;
 	}
 }
