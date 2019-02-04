@@ -38,6 +38,7 @@ TagManager:
   - Player
   - InteractionArea
 <<<<<<< HEAD
+<<<<<<< HEAD
   - 
 =======
   - CommonRay
@@ -49,6 +50,12 @@ TagManager:
 >>>>>>> 4c13d2c... Сделал ИДЕАЛЬНУЮ систему поля зрения врага
   - 
   - 
+=======
+  - Floor1
+  - Floor2
+  - Floor3
+  - CommonRay
+>>>>>>> e276e72... Немножечка подрочил слои
   - 
   - 
   - 

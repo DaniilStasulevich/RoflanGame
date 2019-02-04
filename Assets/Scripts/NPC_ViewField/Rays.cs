@@ -29,6 +29,7 @@ public class Rays : MonoBehaviour {
 	[SerializeField]
 	public float lightSourceSize = 0;
 
+    public LayerMask mask = 11;
 
 	private GameObject Player;
 	// Перегружаем унарный оператор - 
@@ -36,7 +37,7 @@ public class Rays : MonoBehaviour {
 
 	void Start () {
 
-		
+        Debug.Log(LayerMask.LayerToName(mask));
 
 			// Получем доступ к свойствам SpriteRender
 			sprite = GetComponentInChildren<SpriteRenderer>();
@@ -48,28 +49,28 @@ public class Rays : MonoBehaviour {
 		//foreach (var direction in ArrayOfVectors)
 		//	CheckRaycast(direction);
 
-		if (this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Right")
-		{
-			sprite.flipX = false;
-			lightAngle = 0;
+		//if (this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Right")
+		//{
+		//	sprite.flipX = false;
+		//	lightAngle = 0;
 
-		}
-		else if(this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Left")
-		{
-			sprite.flipX = true;
-			lightAngle = -180;
+		//}
+		//else if(this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Left")
+		//{
+		//	sprite.flipX = true;
+		//	lightAngle = -180;
 		
-		}
-		else if (this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Up")
-		{
-			lightAngle = 90;
+		//}
+		//else if (this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Up")
+		//{
+		//	lightAngle = 90;
 		
-		}
-		else if (this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Down")
-		{
+		//}
+		//else if (this.gameObject.GetComponent<MoveTest>().Points[PreviousFlag()].tag == "Down")
+		//{
 
-			lightAngle = -90;
-		}
+		//	lightAngle = -90;
+		//}
 		CreateVectors();
 	}
 
@@ -110,7 +111,7 @@ public class Rays : MonoBehaviour {
 		{
 			Vector3 origin = initialLocation - (locationOffset * i);
 			Vector3 direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (i * RaySpacing + initialAngle)) * raycastMaxDistance, Mathf.Sin(Mathf.Deg2Rad * (i * RaySpacing + initialAngle)) * raycastMaxDistance);
-			RaycastHit2D hit = Physics2D.Raycast(origin, direction, raycastMaxDistance);
+			RaycastHit2D hit = Physics2D.Raycast(origin, direction, raycastMaxDistance, 0);
 			if (hit)
 			{
 				Debug.DrawRay(origin, (direction * hit.distance / raycastMaxDistance),Color.yellow);
