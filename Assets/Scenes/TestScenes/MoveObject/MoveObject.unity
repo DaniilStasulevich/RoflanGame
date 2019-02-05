@@ -558,6 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   numberOfRays: 64
   lightAngle: 175
   lightCone: 0
@@ -567,11 +568,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 11
 =======
+=======
+>>>>>>> 1382195... hui
   numberOfRays: 42
   lightAngle: 180
   lightCone: 90
   raycastMaxDistance: 10
   lightSourceSize: 0
+<<<<<<< HEAD
+>>>>>>> 1382195... hui
+=======
 >>>>>>> 1382195... hui
 --- !u!82 &468560015
 AudioSource:
