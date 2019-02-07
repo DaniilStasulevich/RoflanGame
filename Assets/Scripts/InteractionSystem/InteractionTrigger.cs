@@ -78,7 +78,6 @@ public class InteractionTrigger : MonoBehaviour {
         {
             Vector3 origin = initialLocation - (locationOffset * i);
             Vector3 direction = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (i * RaySpacing + initialAngle)) * raycastMaxDistance, Mathf.Sin(Mathf.Deg2Rad * (i * RaySpacing + initialAngle)) * raycastMaxDistance);
-            RaycastHit2D hit = Physics2D.Raycast(origin, direction, raycastMaxDistance, 0);
             if (hit)
             {
                 Debug.DrawRay(origin, (direction * hit.distance / raycastMaxDistance), Color.yellow);
