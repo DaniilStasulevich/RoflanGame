@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InteractionManager : MonoBehaviour {
     IInteraction[] Interactions = new IInteraction[3];
-    private GameObject InteractableObj;
+    private GameObject InteractableObj, PrevObj;
     public bool DrawingInteractions = false;
     public int textSize = 14;
     public Color textColor = Color.white;
@@ -21,6 +21,12 @@ public class InteractionManager : MonoBehaviour {
     //Вызывается, когда мы подходим к объекту, с которым возможны взаимодействия
     public void StartInteraction(GameObject o)
     {
+        if (PrevObj == o)
+        {
+            Debug.Log("Look at same obj");
+            return;
+        }
+        PrevObj = o;
         InteractableObj = o; //Запоминаем объект, с которым в данный момент может быть взаимодействие
         DrawingInteractions = true; //Рисуем над объектом меню взаимодействий
         IInteraction[] interactions = o.GetComponents<IInteraction>(); //Берем у объекта все взаимодействия, которые к нему прикреплены
@@ -38,7 +44,7 @@ public class InteractionManager : MonoBehaviour {
     public void CloseInteraction()
     {
         DrawingInteractions = false;
-        Interactions = new IInteraction[3]; //обнуляем массив
+        //Interactions = new IInteraction[3]; //обнуляем массив
     }
 
     private void OnGUI()

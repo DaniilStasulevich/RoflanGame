@@ -16,7 +16,7 @@ public class FloorPassing : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         collision.gameObject.layer = ToFloor;
     }
