@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿using System.Collections;
+=======
+using System.Collections;
+>>>>>>> 564e40e... aa
 =======
 using System.Collections;
 >>>>>>> 564e40e... aa
@@ -18,7 +22,11 @@ public class Z_Pos_Start : MonoBehaviour {
 		
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 564e40e... aa
 =======
 }
 >>>>>>> 564e40e... aa
