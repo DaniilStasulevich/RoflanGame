@@ -44,6 +44,7 @@ public class InteractionManager : MonoBehaviour {
     public void CloseInteraction()
     {
         DrawingInteractions = false;
+        PrevObj = null;
         //Interactions = new IInteraction[3]; //обнуляем массив
     }
 
