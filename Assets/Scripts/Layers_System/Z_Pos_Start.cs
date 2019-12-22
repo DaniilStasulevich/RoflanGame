@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
+=======
+using System.Collections;
+>>>>>>> 564e40e... aa
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,4 +17,8 @@ public class Z_Pos_Start : MonoBehaviour {
 	void Update () {
 		
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 564e40e... aa
